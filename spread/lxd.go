@@ -112,8 +112,8 @@ func (p *lxdProvider) Allocate(ctx context.Context, system *System) (Server, err
 	if !p.options.Reuse {
 		args = append(args, "--ephemeral")
 	}
-	if p.backend.Profiles != "" {
-		profiles := strings.Split(p.backend.Profiles, ",")
+	if p.backend.ContainerProfiles != "" {
+		profiles := strings.Split(p.backend.ContainerProfiles, ",")
 		for _, profile := range profiles {
 			args = append(args, "--profile", profile)
 		}

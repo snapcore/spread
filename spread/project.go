@@ -60,7 +60,7 @@ type Backend struct {
 	Memory Size
 
 	// Only for LXD so far.
-	Profiles string
+	ContainerProfiles string `yaml:"container-profiles"`
 
 	// Only for Linode and Google so far.
 	Plan     string

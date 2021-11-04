@@ -796,7 +796,7 @@ Additionally, you can provide a comma-seperated list of LXD profiles to use:
 ```
 backends:
     lxd:
-        profiles: my-profile
+        container-profiles: my-profile
         systems:
             - ubuntu-16.04
 ```
