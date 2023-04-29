@@ -35,6 +35,7 @@ type Options struct {
 	Artifacts      string
 	Seed           int64
 	Repeat         int
+	Tag            string
 	GarbageCollect bool
 }
 
