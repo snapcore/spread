@@ -482,6 +482,16 @@ func (p *lxdProvider) serverJSON(name string) (*lxdServerJSON, error) {
 func (p *lxdProvider) tuneSSH(name string) error {
 	cmds := [][]string{
 		{"sed", "-i", `s/^\s*#\?\s*\(PermitRootLogin\|PasswordAuthentication\)\>.*/\1 yes/`, "/etc/ssh/sshd_config"},
+		// provide a higher priority drop in with our overrides
+		{"/bin/bash", "-c", `
+if [ -d /etc/ssh/sshd_config.d ]; then
+    cat <<EOF > /etc/ssh/sshd_config.d/01-spread-overrides.conf
+PermitRootLogin yes
+PasswordAuthentication yes
+EOF
+fi
+`[1:],
+		},
 		{"/bin/bash", "-c", fmt.Sprintf("echo root:'%s' | chpasswd", p.options.Password)},
 		{"killall", "-HUP", "sshd"},
 	}
